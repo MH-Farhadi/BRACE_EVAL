@@ -1,0 +1,141 @@
+<?xml version="1.0" ?>
+<robot name="robot32" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.014465423320095172 -0.011835969483502575 0.33861911769152025" rpy="0 0 0"/>
+    <mass value="34.438626146403976"/>
+    <inertia ixx="2.571226" iyy="2.571398" izz="0.223156" ixy="0.001878" iyz="0.032207" ixz="0.04669"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="shoulder_link_1">
+  <inertial>
+    <origin xyz="0.13133764717788565 0.09177246137939866 -0.4093979685027963" rpy="0 0 0"/>
+    <mass value="8.626417815320053"/>
+    <inertia ixx="0.023454" iyy="0.033252" izz="0.045968" ixy="-0.013875" iyz="-0.001158" ixz="-0.001499"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.058979 0.041298 -0.83" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/shoulder_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0.058979 0.041298 -0.83" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/shoulder_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="elbow_link_1">
+  <inertial>
+    <origin xyz="0.14489768094391825 -0.01990323140936625 -0.010112140605986752" rpy="0 0 0"/>
+    <mass value="22.357030788873505"/>
+    <inertia ixx="0.035426" iyy="0.238613" izz="0.251981" ixy="0.030284" iyz="0.000649" ixz="-0.004412"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.105556 -0.074155 -0.368226" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/elbow_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.105556 -0.074155 -0.368226" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/elbow_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="wrist_link_1">
+  <inertial>
+    <origin xyz="0.09128606520399923 0.06485282195981397 -0.024831970970250528" rpy="0 0 0"/>
+    <mass value="10.544145312153212"/>
+    <inertia ixx="0.034703" iyy="0.058357" izz="0.089602" ixy="-0.034425" iyz="-0.000295" ixz="-0.000418"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.377673 -0.03444 -0.321726" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/wrist_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.377673 -0.03444 -0.321726" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/wrist_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="end_link_1">
+  <inertial>
+    <origin xyz="0.002100189659331675 0.0009940682583014226 -0.004675279556193734" rpy="0 0 0"/>
+    <mass value="0.34955592300531374"/>
+    <inertia ixx="0.000146" iyy="0.000144" izz="0.000257" ixy="0.0" iyz="0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.560829 -0.165127 -0.276226" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/end_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.560829 -0.165127 -0.276226" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://robot32_description/meshes/end_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="base_to_shoulder_joint" type="prismatic">
+  <origin xyz="-0.058979 -0.041298 0.83" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="shoulder_link_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+  <limit upper="0.345" lower="-0.223" effort="100" velocity="100"/>
+</joint>
+
+<joint name="shoulder_to_elbow_joint" type="revolute">
+  <origin xyz="0.164535 0.115453 -0.461774" rpy="0 0 0"/>
+  <parent link="shoulder_link_1"/>
+  <child link="elbow_link_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit upper="0.977384" lower="-2.478368" effort="100" velocity="100"/>
+</joint>
+
+<joint name="elbow_to_wrist_joint" type="revolute">
+  <origin xyz="0.272117 -0.039715 -0.0465" rpy="0 0 0"/>
+  <parent link="elbow_link_1"/>
+  <child link="wrist_link_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit upper="6.283185" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+<joint name="wrist_to_end_joint" type="revolute">
+  <origin xyz="0.183156 0.130687 -0.0455" rpy="0 0 0"/>
+  <parent link="wrist_link_1"/>
+  <child link="end_link_1"/>
+  <axis xyz="0.0 0.0 -1.0"/>
+  <limit upper="6.283185" lower="0.0" effort="100" velocity="100"/>
+</joint>
+
+</robot>
